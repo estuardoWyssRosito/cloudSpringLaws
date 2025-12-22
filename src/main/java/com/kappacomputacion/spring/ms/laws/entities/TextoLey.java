@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -47,4 +48,11 @@ public class TextoLey {
 
     @Column(name = "version")
     private int version;
+
+    @Size(max = 60)
+    @NotNull
+    @ColumnDefault("'law'")
+    @Column(name = "iaItem", nullable = false, length = 60)
+    private String iaItem;
+
 }

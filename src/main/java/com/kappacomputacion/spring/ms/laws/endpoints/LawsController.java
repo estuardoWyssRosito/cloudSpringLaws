@@ -271,8 +271,9 @@ public class LawsController {
         String secKeyFromCookieDecrypted = cloudValidation.decryptKeys(secKeyFromCookie);
         MainLawResponse ikcResponse = new MainLawResponse();
 
-        lawKey = lawKey.replace("%23", "#");
-        lawKey = lawKey.replace("%2b", "+");
+        lawKey = lawKey.replaceAll("%23", "#");
+        lawKey = lawKey.replaceAll("%2b", "+");
+        lawKey = lawKey.replaceAll("%24", "$");
 
         if (cloudValidation.validateSupportedLanguages(userLan)) {
             // if lan is not supported by the sys we set the default lan to english thinking world-wide
@@ -288,6 +289,9 @@ public class LawsController {
                 ikcResponse.setSuccess(true);
 
                 LawsMain law = this.lawsMainService.getLaw(lawKey);
+
+                System.out.println("Ley recuperada.");
+                System.out.println(law.getIaItem());
 
                 ikcResponse.setMessage(this.lawsMainService.getSelectError());
 

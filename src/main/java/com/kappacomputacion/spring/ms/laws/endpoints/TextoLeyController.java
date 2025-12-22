@@ -370,8 +370,9 @@ public class TextoLeyController {
         String secKeyFromCookieDecrypted = cloudValidation.decryptKeys(secKeyFromCookie);
         TextoLeyItemResponse ikcResponse = new TextoLeyItemResponse();
 
-        recordId = recordId.replace("%23", "#");
-        recordId = recordId.replace("%2b", "+");
+        recordId = recordId.replaceAll("%23", "#");
+        recordId = recordId.replaceAll("%2b", "+");
+        recordId = recordId.replaceAll("%24", "$");
 
         if (cloudValidation.validateSupportedLanguages(userLan)) {
             // if lan is not supported by the sys we set the default lan to english thinking world-wide

@@ -3,22 +3,18 @@ package com.kappacomputacion.spring.ms.laws.services;
 import com.kappacomputacion.spring.ms.laws.dtos.TextoLeyDto;
 import com.kappacomputacion.spring.ms.laws.dtos.TextoLeyTreeUiDto;
 import com.kappacomputacion.spring.ms.laws.dtos.TextoLeyUpdateDto;
-import com.kappacomputacion.spring.ms.laws.dtos.treeui.CountryNode;
 import com.kappacomputacion.spring.ms.laws.dtos.treeui.LawContentChild;
 import com.kappacomputacion.spring.ms.laws.dtos.treeui.LawNode;
-import com.kappacomputacion.spring.ms.laws.dtos.treeui.TreeProcessNodes;
 import com.kappacomputacion.spring.ms.laws.entities.LawsMain;
 import com.kappacomputacion.spring.ms.laws.entities.TextoLey;
-import com.kappacomputacion.spring.ms.laws.shared.ServiceVariables;
 import com.kappacomputacion.spring.ms.laws.repositories.TextoLeyRepository;
+import com.kappacomputacion.spring.ms.laws.shared.ServiceVariables;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @company kappa.computacion
@@ -49,6 +45,7 @@ public class TextoLeyService extends ServiceVariables {
         TextoLey entity = new TextoLey();
         entity.setRecordId(textoLeyDto.getRecordId());
         entity.setItemId(law);
+        entity.setIaItem(textoLeyDto.getIaItem());
         entity.setFuenteId(textoLeyDto.getFuenteId());
         entity.setFuenteArticuloNumero(textoLeyDto.getFuenteArticuloNumero());
         entity.setFuenteArticuloNombre(textoLeyDto.getFuenteArticuloNombre());
@@ -120,7 +117,7 @@ public class TextoLeyService extends ServiceVariables {
             TextoLey content = textoLey.get();
             selectError = "Contenido Artículo recuperado con éxito!!";
             articleContent = new TextoLeyDto(
-                    content.getRecordId(), content.getItemId().getItemId(), content.getFuenteId(),
+                    content.getRecordId(), content.getItemId().getItemId(), content.getIaItem(), content.getFuenteId(),
                     content.getFuenteArticuloNumero(), content.getFuenteArticuloNombre(),
                     content.getFuenteArticuloTexto(), content.getVersion(), ""
             );
@@ -156,7 +153,7 @@ public class TextoLeyService extends ServiceVariables {
         nodes.forEach(
                 node -> {
                     TextoLeyDto newNode = new TextoLeyDto(
-                            node.getRecordId(), node.getItemId().getItemId(), node.getFuenteId(),
+                            node.getRecordId(), node.getItemId().getItemId(), node.getIaItem(), node.getFuenteId(),
                             node.getFuenteArticuloNumero(), node.getFuenteArticuloNombre(),
                             node.getFuenteArticuloTexto(), node.getVersion(), node.getItemId().getCountry()
                     );
@@ -262,6 +259,12 @@ public class TextoLeyService extends ServiceVariables {
                 updateError += "<br/> Descripción actualizada.";
             }
 
+            if(updatedContent.isIaItemChanged()){
+                managedEntity.setIaItem(updatedContent.getIaItem());
+                updated++;
+                updateError += "<br/> Relación con IA actualizada.";
+            }
+
             if (updatedContent.isFuenteArticuloNumeroChanged()) {
                 managedEntity.setFuenteArticuloNumero(updatedContent.getFuenteArticuloNumero());
                 updated++;
@@ -295,13 +298,13 @@ public class TextoLeyService extends ServiceVariables {
     }
 
     public boolean deleteLawContent(TextoLey managedEntity) {
-        deleteError="";
-        errorOccurred=false;
+        deleteError = "";
+        errorOccurred = false;
         boolean deleted = false;
 
         try {
             this.textoLeyRepository.delete(managedEntity);
-            deleteError = managedEntity.getFuenteArticuloNombre()+" fué eliminado exitosamente!!";
+            deleteError = managedEntity.getFuenteArticuloNombre() + " fué eliminado exitosamente!!";
             deleted = true;
         } catch (Exception ex) {
             errorOccurred = true;

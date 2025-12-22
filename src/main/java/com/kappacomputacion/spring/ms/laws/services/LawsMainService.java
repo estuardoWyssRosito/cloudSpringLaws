@@ -44,6 +44,7 @@ public class LawsMainService extends ServiceVariables {
     public LawsMain createLawsMainEntity(LawsMainDto newLaw) {
         LawsMain entity = new LawsMain();
         entity.setItemId(newLaw.getItemId());
+        entity.setIaItem(newLaw.getIaItem());
         entity.setDecretoId(newLaw.getDecretoId());
         entity.setCountry(newLaw.getCountry());
         entity.setLan(newLaw.getLan());
@@ -109,8 +110,13 @@ public class LawsMainService extends ServiceVariables {
             if (entityUpdate.isDecretoIdChanged()) {
                 managedEntity.setDecretoId(entityUpdate.getDecretoId());
                 updated++;
-                updateError += "Decreto número actualizado.";
+                updateError += "<br/> Decreto actualizado.";
+            }
 
+            if(entityUpdate.isIaItemChanged()){
+                managedEntity.setIaItem(entityUpdate.getIaItem());
+                updated++;
+                updateError += "Relación IA actualizada.";
             }
 
             if (entityUpdate.isCountryChanged()) {

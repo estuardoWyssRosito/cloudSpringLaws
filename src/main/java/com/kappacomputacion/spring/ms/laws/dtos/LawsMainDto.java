@@ -17,6 +17,10 @@ public class LawsMainDto implements Serializable {
     @NotNull
     @NotBlank
     String itemId;
+    @Size(max = 60)
+    @NotNull
+    @NotBlank
+    String iaItem;
     @NotNull
     @NotBlank
     @Size(max = 60)

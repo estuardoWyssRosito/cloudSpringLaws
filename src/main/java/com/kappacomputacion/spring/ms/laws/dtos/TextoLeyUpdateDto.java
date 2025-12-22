@@ -22,6 +22,10 @@ public class TextoLeyUpdateDto{
     @NotBlank
     @Size(max = 60)
     String itemId;
+    @Size(max = 60)
+    @NotNull
+    @NotBlank
+    String iaItem;
     @NotNull
     @Size(max = 60)
     String fuenteId;
@@ -39,4 +43,5 @@ public class TextoLeyUpdateDto{
     boolean fuenteArticuloNumeroChanged;
     boolean fuenteArticuloNombreChanged;
     boolean fuenteArticuloTextoChanged;
+    boolean iaItemChanged;
 }

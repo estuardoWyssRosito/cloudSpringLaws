@@ -22,6 +22,10 @@ public class TextoLeyDto implements Serializable {
     @NotBlank
     @Size(max = 60)
     String itemId;
+    @Size(max = 60)
+    @NotNull
+    @NotBlank
+    String iaItem;
     @NotNull
     @Size(max = 60)
     String fuenteId;
