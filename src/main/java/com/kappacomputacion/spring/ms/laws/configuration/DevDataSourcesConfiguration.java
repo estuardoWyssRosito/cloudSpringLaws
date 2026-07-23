@@ -15,8 +15,8 @@ public class DevDataSourcesConfiguration {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/laws")
-                .username("root")
-                .password("Hoperos#4533")
+                .username("****")
+                .password("************")
                 .build();
     }
 }
