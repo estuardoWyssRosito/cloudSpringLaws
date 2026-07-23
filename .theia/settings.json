@@ -1,0 +1,5 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "maven.view": "hierarchical",
+    "java.configuration.maven.userSettings": "/Applications/apache-maven-3.8.6/conf/settings.xml"
+}

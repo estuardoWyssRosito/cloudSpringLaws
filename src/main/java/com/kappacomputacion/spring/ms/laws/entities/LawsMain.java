@@ -70,8 +70,7 @@ public class LawsMain {
 
     @Size(max = 60)
     @NotNull
-    @ColumnDefault("'law'")
-    @Column(name = "iaItem", nullable = false, length = 60)
+    @Column(name = "ia_item", nullable = false, length = 60)
     private String iaItem;
 
 }

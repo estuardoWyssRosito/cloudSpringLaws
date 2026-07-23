@@ -3,6 +3,8 @@ package com.kappacomputacion.spring.ms.laws.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -11,7 +13,8 @@ import java.time.LocalDate;
 /**
  * DTO for {@link com.kappacomputacion.spring.ms.laws.entities.LawsMain}
  */
-@Value
+@Getter
+@Setter
 public class LawsMainDto implements Serializable {
     @Size(max = 60)
     @NotNull

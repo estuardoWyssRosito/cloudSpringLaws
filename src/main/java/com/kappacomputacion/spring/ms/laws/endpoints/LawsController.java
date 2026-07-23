@@ -297,7 +297,7 @@ public class LawsController {
 
                 if(!this.lawsMainService.isErrorOccurred()){
                     ikcResponse.setStatus("ok");
-                    ikcResponse.setMainLaw(law);
+                    ikcResponse.setMainLaw(this.lawsMainService.convertEntityToDto(law));
                 }else{
                     ikcResponse.setStatus("err");
                     ikcResponse.setMainLaw(null);

@@ -41,6 +41,25 @@ public class LawsMainService extends ServiceVariables {
         countriesMap.put("DO", "República Dominicana");
     }
 
+    public LawsMainDto convertEntityToDto(LawsMain entity){
+        LawsMainDto dto = new LawsMainDto();
+        dto.setItemId(entity.getItemId());
+        dto.setIaItem(entity.getIaItem());
+        dto.setDecretoId(entity.getDecretoId());
+        dto.setCountry(entity.getCountry());
+        dto.setLan(entity.getLan());
+        dto.setDecretoNombre(entity.getDecretoNombre());
+        dto.setDecretante(entity.getDecretante());
+        dto.setDecretoDescripcion(entity.getDecretoDescripcion());
+        dto.setInicioVigencia(entity.getInicioVigencia());
+        dto.setFinVigencia(entity.getFinVigencia());
+        dto.setFechaPublicacion(entity.getFechaPublicacion());
+        dto.setTipoLey(entity.getTipoLey());
+        dto.setVersion(entity.getVersion());
+
+        return dto;
+    }
+
     public LawsMain createLawsMainEntity(LawsMainDto newLaw) {
         LawsMain entity = new LawsMain();
         entity.setItemId(newLaw.getItemId());
@@ -91,6 +110,7 @@ public class LawsMainService extends ServiceVariables {
         try {
             insertError = "Ley grabada con éxito!!";
             newEntity = repository.save(entity);
+            repository.flush();
         } catch (Exception ex) {
             errorOccurred = true;
             insertError = ex.getMessage();
