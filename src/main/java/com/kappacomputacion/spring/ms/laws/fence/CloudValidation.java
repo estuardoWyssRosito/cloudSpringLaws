@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class CloudValidation {
-    private String passPhrase = "8kov1wOMsPsN$5*wPJ67dub$T";
+    private String passPhrase = "****************";
     private String securityMessage="";
 
 
