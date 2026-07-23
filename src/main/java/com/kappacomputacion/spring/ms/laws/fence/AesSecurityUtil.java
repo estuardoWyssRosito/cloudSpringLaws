@@ -24,7 +24,7 @@ public class AesSecurityUtil {
     private final int keySize = 128;
     private final int iterationCount=1000;
     private final Cipher cipher;
-    private final String passPhrase = "8kov1wOMsPsN$5*wPJ67dub$T";
+    private final String passPhrase = "**********************";
 
     public AesSecurityUtil() {
         try {
